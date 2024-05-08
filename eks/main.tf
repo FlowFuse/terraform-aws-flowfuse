@@ -1,30 +1,4 @@
 locals {
-  # enabled = module.this.enabled
-
-  # private_ipv6_enabled = var.private_ipv6_enabled
-
-  # The usage of the specific kubernetes.io/cluster/* resource tags below are required
-  # for EKS and Kubernetes to discover and manage networking resources
-  # https://aws.amazon.com/premiumsupport/knowledge-center/eks-vpc-subnet-discovery/
-  # https://github.com/kubernetes-sigs/aws-load-balancer-controller/blob/main/docs/deploy/subnet_discovery.md
-  # tags = { "kubernetes.io/cluster/${module.label.id}" = "shared" }
-
-
-
-  # Enable the IAM user creating the cluster to administer it,
-  # without using the bootstrap_cluster_creator_admin_permissions option,
-  # as a way to test the access_entry_map feature.
-  # In general, this is not recommended. Instead, you should
-  # create the access_entry_map statically, with the ARNs you want to
-  # have access to the cluster. We do it dynamically here just for testing purposes.
-  # access_entry_map = {
-  #   (data.aws_iam_session_context.current.issuer_arn) = {
-  #     access_policy_associations = {
-  #       ClusterAdmin = {}
-  #     }
-  #   }
-  # }
-
   # https://docs.aws.amazon.com/eks/latest/userguide/managing-vpc-cni.html#vpc-cni-latest-available-version
   vpc_cni_addon = {
     addon_name               = "vpc-cni"
@@ -61,15 +35,8 @@ module "eks_cluster" {
     bootstrap_cluster_creator_admin_permissions = false
   }
 
-  # This is to test `allowed_security_group_ids` and `allowed_cidr_blocks`
-  # In a real cluster, these should be some other (existing) Security Groups and CIDR blocks to allow access to the cluster
   allowed_security_group_ids = [data.aws_security_group.vpc_default_security_group_id.id]
   allowed_cidr_blocks        = [data.aws_vpc.this.cidr_block]
-
-  # kubernetes_network_ipv6_enabled = local.private_ipv6_enabled
-
-  # context = module.this.context
-
 }
 
 module "node_groups" {
