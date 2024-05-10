@@ -91,7 +91,7 @@ resource "random_password" "database_password" {
 module "replica" {
   source  = "cloudposse/rds/aws"
   version = "1.1.0"
-  enabled = true
+  enabled = false
 
   namespace                   = var.namespace
   stage                       = var.stage
