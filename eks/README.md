@@ -10,6 +10,34 @@ The module supports the following:
 - Optional creation and management of related AWS resources such as IAM policies and roles.
 - Support for enabling various EKS cluster features such as detailed monitoring and cluster autoscaling.
 
+## Usage
+
+`Replace AWS_ACCOUNT_ID with your AWS account ID`
+
+```hcl
+  module "eks" {
+    source = "git::https://github.com/FlowFuse/terraform-aws-flowfuse.git//eks?ref=main"
+
+    namespace = "my-company"
+    stage     = "production"
+
+    kubernetes_version           = "1.29"
+    eks_access_entry_map         = {
+      "arn:aws:iam::AWS_ACCOUNT_ID:user/your-user" = {
+        access_policy_associations = {
+          ClusterAdmin = {}
+        }
+      }
+    }
+
+    tags = {
+      Environment = "production"
+      Project = "my-project"
+      terraform = true
+    }
+  }
+```
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -51,9 +79,7 @@ The module supports the following:
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_addons"></a> [addons](#input\_addons) | Manages [`aws_eks_addon`](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_addon) resources. | <pre>list(object({<br>    addon_name                  = string<br>    addon_version               = string<br>    resolve_conflicts           = optional(string, null)<br>    resolve_conflicts_on_create = optional(string, null)<br>    resolve_conflicts_on_update = optional(string, null)<br>    service_account_role_arn    = string<br>  }))</pre> | `[]` | no |
-| <a name="input_cluster_autoscaler_enabled"></a> [cluster\_autoscaler\_enabled](#input\_cluster\_autoscaler\_enabled) | n/a | `bool` | `true` | no |
 | <a name="input_cluster_log_retention_period"></a> [cluster\_log\_retention\_period](#input\_cluster\_log\_retention\_period) | The value in days for the retention period of the log group. | `number` | `14` | no |
-| <a name="input_detailed_monitoring_enabled"></a> [detailed\_monitoring\_enabled](#input\_detailed\_monitoring\_enabled) | n/a | `bool` | `false` | no |
 | <a name="input_eks_access_entry_map"></a> [eks\_access\_entry\_map](#input\_eks\_access\_entry\_map) | Represents a map of access entries for an EKS cluster. Each entry in the map represents the access configuration for a specific principal ARN | <pre>map(object({<br>    # key is principal_arn<br>    user_name = optional(string)<br>    # Cannot assign "system:*" groups to IAM users, use ClusterAdmin and Admin instead<br>    kubernetes_groups = optional(list(string), [])<br>    type              = optional(string, "STANDARD")<br>    access_policy_associations = optional(map(object({<br>      # key is policy_arn or policy_name<br>      access_scope = optional(object({<br>        type       = optional(string, "cluster")<br>        namespaces = optional(list(string))<br>      }), {}) # access_scope<br>    })), {})  # access_policy_associations<br>  }))</pre> | `{}` | no |
 | <a name="input_eks_node_groups"></a> [eks\_node\_groups](#input\_eks\_node\_groups) | Map of maps containing configuration of EKS node groups to be created. The key is the name of the node group.<br>    * `name` - Node Group name<br>    * `instance_types` - EC2 instance types to use for the node group<br>    * `ami_type` - AMI type for the instance<br>    * `desired_size` - desired number of instances<br>    * `min_size` - minimum number of instances<br>    * `max_size` - maximum number of instances<br>    * `kubernetes_labels` - Kubernetes labels to apply to the node group<br>    * `cluster_autoscaler_enabled` - whether to enable the cluster autoscaler for the node group<br>    * `detailed_monitoring_enabled` - whether to enable detailed monitoring for the node group<br>    * `attributes` - Additional attributes (e.g. `["eks"]`) | <pre>map(object({<br>    name                        = string<br>    instance_types              = list(string)<br>    ami_type                    = string<br>    desired_size                = number<br>    min_size                    = number<br>    max_size                    = number<br>    kubernetes_labels           = map(string)<br>    cluster_autoscaler_enabled  = bool<br>    detailed_monitoring_enabled = bool<br>    attributes                  = list(string)<br>  }))</pre> | <pre>{<br>  "management": {<br>    "ami_type": "AL2_x86_64",<br>    "attributes": [<br>      "management"<br>    ],<br>    "cluster_autoscaler_enabled": true,<br>    "desired_size": 1,<br>    "detailed_monitoring_enabled": false,<br>    "instance_types": [<br>      "m6a.xlarge"<br>    ],<br>    "kubernetes_labels": {<br>      "role": "management"<br>    },<br>    "max_size": 2,<br>    "min_size": 1,<br>    "name": "management"<br>  },<br>  "projects": {<br>    "ami_type": "AL2_ARM_64",<br>    "attributes": [<br>      "projects"<br>    ],<br>    "cluster_autoscaler_enabled": true,<br>    "desired_size": 1,<br>    "detailed_monitoring_enabled": false,<br>    "instance_types": [<br>      "t4g.large"<br>    ],<br>    "kubernetes_labels": {<br>      "role": "projects"<br>    },<br>    "max_size": 4,<br>    "min_size": 1,<br>    "name": "projects"<br>  }<br>}</pre> | no |
 | <a name="input_enabled_cluster_log_types"></a> [enabled\_cluster\_log\_types](#input\_enabled\_cluster\_log\_types) | A list of the desired control plane logging to enable. Available values: api, audit, authenticator, controllerManager, scheduler | `list(string)` | <pre>[<br>  "api",<br>  "audit",<br>  "authenticator",<br>  "controllerManager",<br>  "scheduler"<br>]</pre> | no |
