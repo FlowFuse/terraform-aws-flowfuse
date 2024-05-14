@@ -1,10 +1,10 @@
 variable "namespace" {
-  type = string
+  type        = string
   description = "ID element. Usually an abbreviation of your organization name, e.g. 'eg' or 'cp', to help ensure generated IDs are globally unique"
 }
 
 variable "stage" {
-  type = string
+  type        = string
   description = "ID element. Usually used to indicate role, e.g. 'prod', 'staging', 'source', 'build', 'test', 'deploy', 'release'"
 }
 
@@ -37,25 +37,25 @@ variable "eks_access_entry_map" {
     })), {})  # access_policy_associations
   }))
   description = "Represents a map of access entries for an EKS cluster. Each entry in the map represents the access configuration for a specific principal ARN"
-  default = {}
+  default     = {}
 }
 
 variable "kubernetes_version" {
-  type    = string
+  type        = string
   description = "The desired Kubernetes master version. If you do not specify a value, the latest available version is used."
-  default = "1.26"
+  default     = "1.26"
 }
 
 variable "enabled_cluster_log_types" {
-  type    = list(string)
+  type        = list(string)
   description = "A list of the desired control plane logging to enable. Available values: api, audit, authenticator, controllerManager, scheduler"
-  default = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
+  default     = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
 }
 
 variable "cluster_log_retention_period" {
-  type    = number
+  type        = number
   description = "The value in days for the retention period of the log group."
-  default = 14
+  default     = 14
 }
 
 variable "eks_node_groups" {
@@ -116,7 +116,7 @@ variable "eks_node_groups" {
   }
 }
 variable "tags" {
-  type    = map(string)
+  type        = map(string)
   description = "A map of tags to add to all resources"
-  default = {}
+  default     = {}
 }
