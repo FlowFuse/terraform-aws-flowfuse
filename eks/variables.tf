@@ -132,6 +132,6 @@ variable "route53_zone_name" {
 
 variable "tags" {
   type    = map(string)
-  description = 
+  description = "A map of tags to add to all resources"
   default = {}
 }
