@@ -2,6 +2,24 @@
 
 The terraform module used to create DNS records in Route53 zone for existing Network Load Balancer.
 
+## Usage
+
+```hcl
+  module "lb_domain" {
+    source  = "git::https://github.com/flowFuse/terraform-aws-flowfuse.git//lb-domain?ref=main"
+
+    namespace = "my-company"
+    route53_zone_name = "example.com"
+    stage = "production"
+
+    tags = {
+      Environment = "production"
+      Project = "my-project"
+      terraform = true
+    }
+  }
+```
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
