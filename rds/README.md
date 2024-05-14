@@ -1,4 +1,31 @@
-# 
+# Terraform RDS module
+
+This Terraform module is designed to create and manage FlowFuse-specific [Amazon RDS (Relational Database Service)](https://aws.amazon.com/rds/) instances.
+
+The module supports the following:
+
+- Creation of RDS primary and replica instances
+- Creation of dedicated VPS and subnets for the RDS instances
+- Creation of FlowFuse-specific databases
+
+The module also provides several outputs including the database address, name, password, and user.
+
+## Usage
+
+```hcl
+  module "rds" {
+    source = "git::https://github.com/flowFuse/terraform-aws-flowfuse.git//rds?ref=main"
+
+    namespace = "my-company"
+    stage     = "production"
+
+    tags = {
+      Environment = "production"
+      Project = "my-project"
+      terraform = true
+    }
+  }
+```
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
