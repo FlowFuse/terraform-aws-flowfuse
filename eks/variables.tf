@@ -58,16 +58,6 @@ variable "cluster_log_retention_period" {
   default = 14
 }
 
-variable "cluster_autoscaler_enabled" {
-  type    = bool
-  default = true
-}
-
-variable "detailed_monitoring_enabled" {
-  type    = bool
-  default = false
-}
-
 variable "eks_node_groups" {
   type = map(object({
     name                        = string
@@ -125,11 +115,6 @@ variable "eks_node_groups" {
     },
   }
 }
-
-variable "route53_zone_name" {
-  type = string
-}
-
 variable "tags" {
   type    = map(string)
   description = "A map of tags to add to all resources"
