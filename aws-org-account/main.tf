@@ -41,7 +41,7 @@ data "aws_iam_policy_document" "default" {
   }
 }
 
-resource "aws_iam_group_policy" "without_mfa" {
+resource "aws_iam_group_policy" "this" {
   name   = module.label.id
   group  = aws_iam_group.default.id
   policy = data.aws_iam_policy_document.default.json
