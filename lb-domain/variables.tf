@@ -13,6 +13,18 @@ variable "route53_zone_name" {
   description = "The name of the Route53 zone"
 }
 
+variable "create_custom_domain_record" {
+  type        = bool
+  description = "Define if a custom domain record should be created"
+  default     = false
+}
+
+variable "custom_domain_record_value" {
+  type        = string
+  description = "The value of the custom domain record"
+  default     = "custom-loadbalancer"
+}
+
 variable "tags" {
   type        = map(string)
   description = "A map of tags to add to all resources"
