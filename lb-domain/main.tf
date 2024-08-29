@@ -26,7 +26,7 @@ locals {
   ]
 
   custom_domain_dns_record = {
-      name = "custom-loadbalancer"
+      name = var.custom_domain_record_value
       type = "CNAME"
       ttl  = 300
       records = [
