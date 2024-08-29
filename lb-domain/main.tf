@@ -6,6 +6,7 @@ data "aws_lb" "ingress" {
 }
 
 data "aws_lb" "custom_domains_ingress" {
+  count = var.create_custom_domain_record ? 1 : 0
   tags = {
     Namespace     = var.namespace
     Stage         = var.stage
@@ -25,14 +26,14 @@ locals {
     }
   ]
 
-  custom_domain_dns_record = {
+  custom_domain_dns_record = var.create_custom_domain_record ? {
       name = var.custom_domain_record_value
       type = "CNAME"
       ttl  = 300
       records = [
-        data.aws_lb.custom_domains_ingress.dns_name
+        data.aws_lb.custom_domains_ingress.0.dns_name
       ]
-    }
+    } : null
 
   dns_records = concat(
     local.main_dns_records,
