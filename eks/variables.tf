@@ -80,6 +80,7 @@ variable "eks_node_groups" {
     * `desired_size` - desired number of instances
     * `min_size` - minimum number of instances
     * `max_size` - maximum number of instances
+    * `kubernetes_version` - Kubernetes version for the node group
     * `kubernetes_labels` - Kubernetes labels to apply to the node group
     * `cluster_autoscaler_enabled` - whether to enable the cluster autoscaler for the node group
     * `detailed_monitoring_enabled` - whether to enable detailed monitoring for the node group
