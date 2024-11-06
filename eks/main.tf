@@ -2,7 +2,7 @@ locals {
   # https://docs.aws.amazon.com/eks/latest/userguide/managing-vpc-cni.html#vpc-cni-latest-available-version
   vpc_cni_addon = {
     addon_name               = "vpc-cni"
-    addon_version            = "v1.18.0-eksbuild.1"
+    addon_version            = var.eks_vpc_cni_addon_version
     resolve_conflicts        = "OVERWRITE"
     service_account_role_arn = one(module.vpc_cni_eks_iam_role[*].service_account_role_arn)
   }
