@@ -21,6 +21,13 @@ variable "addons" {
   description = "Manages [`aws_eks_addon`](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_addon) resources."
 }
 
+variable "eks_vpc_cni_addon_version" {
+  type        = string
+  description = "The version of the VPC CNI addon to install on the EKS cluster"
+  default     = "v1.18.0-eksbuild.1"
+  
+}
+
 variable "eks_access_entry_map" {
   type = map(object({
     # key is principal_arn
