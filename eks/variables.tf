@@ -66,6 +66,7 @@ variable "eks_node_groups" {
     desired_size                = number
     min_size                    = number
     max_size                    = number
+    kubernetes_version          = list(string)
     kubernetes_labels           = map(string)
     cluster_autoscaler_enabled  = bool
     detailed_monitoring_enabled = bool
@@ -79,6 +80,7 @@ variable "eks_node_groups" {
     * `desired_size` - desired number of instances
     * `min_size` - minimum number of instances
     * `max_size` - maximum number of instances
+    * `kubernetes_version` - Kubernetes version for the node group
     * `kubernetes_labels` - Kubernetes labels to apply to the node group
     * `cluster_autoscaler_enabled` - whether to enable the cluster autoscaler for the node group
     * `detailed_monitoring_enabled` - whether to enable detailed monitoring for the node group
@@ -92,6 +94,7 @@ variable "eks_node_groups" {
       desired_size   = 1
       min_size       = 1
       max_size       = 2
+      kubernetes_version = ["1.26"]
       kubernetes_labels = {
         role = "management"
       }
@@ -106,6 +109,7 @@ variable "eks_node_groups" {
       desired_size   = 1
       min_size       = 1
       max_size       = 4
+      kubernetes_version = ["1.26"]
       kubernetes_labels = {
         role = "projects"
       }

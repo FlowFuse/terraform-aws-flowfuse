@@ -46,7 +46,7 @@ module "node_groups" {
   for_each                    = var.eks_node_groups
   subnet_ids                  = data.aws_subnets.private.ids
   cluster_name                = module.eks_cluster.eks_cluster_id
-  kubernetes_version          = [var.kubernetes_version]
+  kubernetes_version          = each.value.kubernetes_version
   instance_types              = each.value.instance_types
   ami_type                    = each.value.ami_type
   desired_size                = each.value.desired_size
