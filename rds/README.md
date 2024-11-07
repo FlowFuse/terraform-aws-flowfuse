@@ -39,14 +39,14 @@ The module also provides several outputs including the database address, name, p
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.44.0 |
-| <a name="provider_random"></a> [random](#provider\_random) | 3.6.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.49.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.6.1 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_primary"></a> [primary](#module\_primary) | cloudposse/rds/aws | 1.1.0 |
+| <a name="module_primary"></a> [primary](#module\_primary) | cloudposse/rds/aws | 1.1.2 |
 | <a name="module_rds_subnets"></a> [rds\_subnets](#module\_rds\_subnets) | cloudposse/dynamic-subnets/aws | 2.4.2 |
 | <a name="module_rds_vpc"></a> [rds\_vpc](#module\_rds\_vpc) | cloudposse/vpc/aws | 2.2.0 |
 | <a name="module_replica"></a> [replica](#module\_replica) | cloudposse/rds/aws | 1.1.0 |
