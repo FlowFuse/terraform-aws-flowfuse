@@ -10,6 +10,14 @@ locals {
   addons = concat([
     local.vpc_cni_addon
   ], var.addons)
+
+  node_group_subnet_ids = {
+    for ng_name, ng_config in var.eks_node_groups :
+    ng_name => ng_config.zone_ids == null ? data.aws_subnets.private.ids : [
+      for subnet_id in data.aws_subnets.private.ids :
+      subnet_id if contains(ng_config.zone_ids, data.aws_subnet.private[subnet_id].availability_zone)
+    ]
+  }
 }
 
 module "eks_cluster" {
@@ -44,7 +52,7 @@ module "node_groups" {
   version = "2.12.0"
 
   for_each                    = var.eks_node_groups
-  subnet_ids                  = data.aws_subnets.private.ids
+  subnet_ids                  = local.node_group_subnet_ids[each.key]
   cluster_name                = module.eks_cluster.eks_cluster_id
   kubernetes_version          = each.value.kubernetes_version
   instance_types              = each.value.instance_types
