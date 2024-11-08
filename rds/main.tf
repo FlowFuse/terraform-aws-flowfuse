@@ -45,41 +45,43 @@ data "aws_vpc" "this" {
 
 module "primary" {
   source  = "cloudposse/rds/aws"
-  version = "1.1.0"
+  version = "1.1.2"
 
   namespace = var.namespace
   stage     = var.stage
   name      = "flowfuse"
   host_name = "db"
   # security_group_ids = [data.aws_vpc.this.cidr_block]
-  ca_cert_identifier          = "rds-ca-ecc384-g1"
-  allowed_cidr_blocks         = [data.aws_vpc.this.cidr_block]
-  database_name               = var.database_name
-  database_user               = var.database_user
-  database_password           = random_password.database_password.result
-  database_port               = var.database_port
-  multi_az                    = false
-  storage_type                = "gp2"
-  allocated_storage           = 10
-  storage_encrypted           = true
-  engine                      = "postgres"
-  engine_version              = "14.10"
-  major_engine_version        = "14"
-  instance_class              = "db.t4g.small"
-  db_parameter_group          = "postgres14"
-  publicly_accessible         = false
-  vpc_id                      = module.rds_vpc.vpc_id
-  subnet_ids                  = module.rds_subnets.private_subnet_ids
-  auto_minor_version_upgrade  = false
-  allow_major_version_upgrade = false
-  apply_immediately           = false
-  maintenance_window          = "Mon:03:00-Mon:04:00"
-  skip_final_snapshot         = true
-  copy_tags_to_snapshot       = true
-  backup_retention_period     = 7
-  backup_window               = "00:52-01:52"
-  deletion_protection         = false
-  tags                        = var.tags
+  ca_cert_identifier                    = "rds-ca-ecc384-g1"
+  allowed_cidr_blocks                   = [data.aws_vpc.this.cidr_block]
+  database_name                         = var.database_name
+  database_user                         = var.database_user
+  database_password                     = random_password.database_password.result
+  database_port                         = var.database_port
+  multi_az                              = false
+  storage_type                          = "gp2"
+  allocated_storage                     = 10
+  storage_encrypted                     = true
+  engine                                = "postgres"
+  engine_version                        = "14.10"
+  major_engine_version                  = "14"
+  instance_class                        = "db.t4g.small"
+  db_parameter_group                    = "postgres14"
+  publicly_accessible                   = false
+  vpc_id                                = module.rds_vpc.vpc_id
+  subnet_ids                            = module.rds_subnets.private_subnet_ids
+  auto_minor_version_upgrade            = false
+  allow_major_version_upgrade           = false
+  apply_immediately                     = false
+  maintenance_window                    = "Mon:03:00-Mon:04:00"
+  skip_final_snapshot                   = true
+  copy_tags_to_snapshot                 = true
+  backup_retention_period               = 7
+  backup_window                         = "00:52-01:52"
+  deletion_protection                   = false
+  performance_insights_enabled          = true
+  performance_insights_retention_period = 7
+  tags                                  = var.tags
 
 }
 
