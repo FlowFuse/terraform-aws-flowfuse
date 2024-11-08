@@ -15,7 +15,7 @@ locals {
     for ng_name, ng_config in var.eks_node_groups :
     ng_name => ng_config.zone_ids == null ? data.aws_subnets.private.ids : [
       for subnet in data.aws_subnets.private.ids :
-      subnet if contains(ng_config.zone_ids, data.aws_subnet.private[subnet].availability_zone)
+      subnet if contains(ng_config.zone_ids, data.aws_subnets.private[subnet].availability_zone)
     ]
   }
 }
