@@ -73,7 +73,7 @@ variable "eks_node_groups" {
     desired_size                = number
     min_size                    = number
     max_size                    = number
-    subnet_ids                  = optional(list(string), null)
+    zone_ids                    = optional(list(string), null)
     kubernetes_version          = list(string)
     kubernetes_labels           = map(string)
     cluster_autoscaler_enabled  = bool
