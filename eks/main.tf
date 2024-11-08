@@ -44,7 +44,7 @@ module "node_groups" {
   version = "2.12.0"
 
   for_each                    = var.eks_node_groups
-  subnet_ids                  = data.aws_subnets.private.ids
+  subnet_ids                  = coalesce(each.value.subnet_ids, data.aws_subnets.private.ids)
   cluster_name                = module.eks_cluster.eks_cluster_id
   kubernetes_version          = each.value.kubernetes_version
   instance_types              = each.value.instance_types
