@@ -50,7 +50,7 @@ variable "eks_access_entry_map" {
 variable "kubernetes_version" {
   type        = string
   description = "The desired Kubernetes master version. If you do not specify a value, the latest available version is used."
-  default     = "1.26"
+  default     = "1.28"
 }
 
 variable "enabled_cluster_log_types" {
@@ -102,7 +102,7 @@ variable "eks_node_groups" {
       desired_size   = 1
       min_size       = 1
       max_size       = 2
-      kubernetes_version = ["1.26"]
+      kubernetes_version = ["1.28"]
       kubernetes_labels = {
         role = "management"
       }
@@ -117,7 +117,7 @@ variable "eks_node_groups" {
       desired_size   = 1
       min_size       = 1
       max_size       = 4
-      kubernetes_version = ["1.26"]
+      kubernetes_version = ["1.28"]
       kubernetes_labels = {
         role = "projects"
       }
