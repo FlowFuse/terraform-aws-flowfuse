@@ -24,8 +24,13 @@ variable "addons" {
 variable "eks_vpc_cni_addon_version" {
   type        = string
   description = "The version of the VPC CNI addon to install on the EKS cluster"
-  default     = "v1.18.0-eksbuild.1"
-  
+  default     = "v1.18.0-eksbuild.1" 
+}
+
+variable "eks_coredns_addon_version" {
+  type        = string
+  description = "The version of the CoreDNS addon to install on the EKS cluster"
+  default     = "v1.9.3-eksbuild.21"
 }
 
 variable "eks_access_entry_map" {
