@@ -24,6 +24,7 @@ locals {
   addons = concat([
     local.vpc_cni_addon,
     local.coredns_addon,
+    local.kube_proxy_addon,
   ], var.addons)
 
   node_group_subnet_ids = {
