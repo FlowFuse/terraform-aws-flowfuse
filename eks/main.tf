@@ -14,10 +14,17 @@ locals {
     service_account_role_arn = null  
   }
   
+  kube_proxy_addon = {
+    addon_name               = "kube-proxy"
+    addon_version            = var.eks_kube_proxy_addon_version
+    resolve_conflicts        = "OVERWRITE"
+    service_account_role_arn = null  
+  }
 
   addons = concat([
     local.vpc_cni_addon,
     local.coredns_addon,
+    local.kube_proxy_addon,
   ], var.addons)
 
   node_group_subnet_ids = {
