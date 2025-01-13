@@ -33,6 +33,12 @@ variable "eks_coredns_addon_version" {
   default     = "v1.9.3-eksbuild.21"
 }
 
+variable "eks_kube_proxy_addon_version" {
+  type        = string
+  description = "The version of the kube-proxy addon to install on the EKS cluster"
+  default     = "v1.26.15-eksbuild.19"
+}
+
 variable "eks_access_entry_map" {
   type = map(object({
     # key is principal_arn
