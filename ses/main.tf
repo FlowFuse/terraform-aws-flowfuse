@@ -84,6 +84,6 @@ resource "aws_iam_policy" "ses-policy" {
 }
 
 resource "aws_iam_role_policy_attachment" "ses" {
-  role        = data.aws_iam_roles.application_role.roles[0].name
+  role        = data.aws_iam_roles.application_role.names[0]
   policy_arn  = aws_iam_policy.ses-policy.arn
 }
