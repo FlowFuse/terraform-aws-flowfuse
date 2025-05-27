@@ -48,6 +48,7 @@ module "dmarc_record" {
 module "eks_ses_iam_role" {
   source  = "cloudposse/eks-iam-role/aws"
   version = "2.1.1"
+  enabled = false
 
   namespace = var.namespace
   stage     = var.stage
