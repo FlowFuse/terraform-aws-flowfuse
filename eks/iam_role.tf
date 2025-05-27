@@ -8,7 +8,7 @@ module "eks_ses_iam_role" {
   aws_account_number          = one(data.aws_caller_identity.current[*].account_id)
   eks_cluster_oidc_issuer_url = module.eks_cluster.eks_cluster_identity_oidc_issuer
 
-  service_account_name      = "flowfuse"
+  service_account_name      = "flowforge"
   service_account_namespace = "default"
 }
 
