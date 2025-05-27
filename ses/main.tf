@@ -74,7 +74,7 @@ data "aws_iam_policy_document" "ses" {
 }
 
 data "aws_iam_roles" "application_role" {
-  name_regex = ".*flowfuse@default.*"
+  name_regex = ".*flowforge@default.*"
 }
 
 resource "aws_iam_policy" "ses-policy" {
