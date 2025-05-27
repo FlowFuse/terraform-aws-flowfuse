@@ -72,3 +72,18 @@ data "aws_iam_policy_document" "ses" {
     ]
   }
 }
+
+data "aws_iam_roles" "application_role" {
+  name_regex = ".*flowfuse@default.*"
+}
+
+resource "aws_iam_policy" "ses-policy" {
+  name        = "FlowFuseSesPolicy"
+  description = "Allows sending email via SES"
+  policy      = data.aws_iam_policy_document.policy.json
+}
+
+resource "aws_iam_role_policy_attachment" "ses" {
+  role        = data.aws_iam_roles.application_role.roles[0].name
+  policy_arn  = aws_iam_policy.ses-policy.arn
+}
