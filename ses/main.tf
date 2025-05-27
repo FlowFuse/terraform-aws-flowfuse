@@ -80,7 +80,7 @@ data "aws_iam_roles" "application_role" {
 resource "aws_iam_policy" "ses-policy" {
   name        = "FlowFuseSesPolicy"
   description = "Allows sending email via SES"
-  policy      = data.aws_iam_policy_document.policy.json
+  policy      = data.aws_iam_policy_document.ses.json
 }
 
 resource "aws_iam_role_policy_attachment" "ses" {
