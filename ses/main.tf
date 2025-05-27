@@ -45,22 +45,6 @@ module "dmarc_record" {
   ]
 }
 
-module "eks_ses_iam_role" {
-  source  = "cloudposse/eks-iam-role/aws"
-  version = "2.1.1"
-  enabled = false
-
-  namespace = var.namespace
-  stage     = var.stage
-
-  aws_account_number          = one(data.aws_caller_identity.current[*].account_id)
-  eks_cluster_oidc_issuer_url = data.aws_eks_cluster.this.identity[0].oidc[0].issuer
-
-  service_account_name      = "flowforge"
-  service_account_namespace = "default"
-  aws_iam_policy_document   = [data.aws_iam_policy_document.ses.json]
-}
-
 data "aws_iam_policy_document" "ses" {
   statement {
     sid    = "AllowToSendEmailsViaSes"
