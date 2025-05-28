@@ -7,5 +7,5 @@ output "cluster_oidc_issuer_url" {
 }
 
 output "flowfuse_role_arn" {
-  value = module.eks_ses_iam_role.service_account_role_name
+  value = module.flowfuse_iam_role.service_account_role_name
 }
