@@ -1,4 +1,4 @@
-module "eks_ses_iam_role" {
+module "flowfuse_iam_role" {
   source  = "cloudposse/eks-iam-role/aws"
   version = "2.2.1"
 
