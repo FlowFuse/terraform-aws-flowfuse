@@ -5,3 +5,7 @@ output "cluster_name" {
 output "cluster_oidc_issuer_url" {
   value = module.eks_cluster.eks_cluster_identity_oidc_issuer
 }
+
+output "flowfuse_role_arn" {
+  value = module.flowfuse_iam_role.service_account_role_name
+}
