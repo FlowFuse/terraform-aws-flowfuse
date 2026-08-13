@@ -38,7 +38,7 @@ locals {
 
 module "eks_cluster" {
   source  = "cloudposse/eks-cluster/aws"
-  version = "4.0.0"
+  version = "4.12.0"
 
   name                         = "flowfuse"
   namespace                    = var.namespace
