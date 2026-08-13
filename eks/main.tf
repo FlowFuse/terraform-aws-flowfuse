@@ -38,7 +38,7 @@ locals {
 
 module "eks_cluster" {
   source  = "cloudposse/eks-cluster/aws"
-  version = "4.0.0"
+  version = "4.12.0"
 
   name                         = "flowfuse"
   namespace                    = var.namespace
@@ -65,7 +65,7 @@ module "eks_cluster" {
 
 module "node_groups" {
   source  = "cloudposse/eks-node-group/aws"
-  version = "2.12.0"
+  version = "3.4.0"
 
   for_each                    = var.eks_node_groups
   subnet_ids                  = local.node_group_subnet_ids[each.key]
