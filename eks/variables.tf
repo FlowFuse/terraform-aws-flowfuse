@@ -24,7 +24,13 @@ variable "addons" {
 variable "eks_vpc_cni_addon_version" {
   type        = string
   description = "The version of the VPC CNI addon to install on the EKS cluster"
-  default     = "v1.18.0-eksbuild.1" 
+  default     = "v1.18.0-eksbuild.1"
+}
+
+variable "eks_vpc_cni_configuration_values" {
+  type        = any
+  description = "Configuration values for the VPC CNI addon, e.g. `{ enableNetworkPolicy = \"true\" }`. Replaces the addon's whole configuration. `null` leaves it unmanaged"
+  default     = null
 }
 
 variable "eks_coredns_addon_version" {
@@ -107,12 +113,12 @@ variable "eks_node_groups" {
   EOT
   default = {
     management = {
-      name           = "management"
-      instance_types = ["m6a.xlarge"]
-      ami_type       = "AL2_x86_64"
-      desired_size   = 1
-      min_size       = 1
-      max_size       = 2
+      name               = "management"
+      instance_types     = ["m6a.xlarge"]
+      ami_type           = "AL2_x86_64"
+      desired_size       = 1
+      min_size           = 1
+      max_size           = 2
       kubernetes_version = ["1.26"]
       kubernetes_labels = {
         role = "management"
@@ -122,12 +128,12 @@ variable "eks_node_groups" {
       attributes                  = ["management"]
     },
     projects = {
-      name           = "projects"
-      instance_types = ["t4g.large"]
-      ami_type       = "AL2_ARM_64"
-      desired_size   = 1
-      min_size       = 1
-      max_size       = 4
+      name               = "projects"
+      instance_types     = ["t4g.large"]
+      ami_type           = "AL2_ARM_64"
+      desired_size       = 1
+      min_size           = 1
+      max_size           = 4
       kubernetes_version = ["1.26"]
       kubernetes_labels = {
         role = "projects"
