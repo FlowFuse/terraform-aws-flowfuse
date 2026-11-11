@@ -28,8 +28,8 @@ variable "eks_vpc_cni_addon_version" {
 }
 
 variable "eks_vpc_cni_configuration_values" {
-  type        = any
-  description = "Configuration values for the VPC CNI addon, e.g. `{ enableNetworkPolicy = \"true\" }`. Replaces the addon's whole configuration. `null` leaves it unmanaged"
+  type        = map(string)
+  description = "Top-level configuration values for the VPC CNI addon, e.g. `{ enableNetworkPolicy = \"true\" }`. Replaces the addon's whole configuration. `null` leaves it unmanaged"
   default     = null
 }
 

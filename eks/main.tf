@@ -1,12 +1,11 @@
 locals {
   # https://docs.aws.amazon.com/eks/latest/userguide/managing-vpc-cni.html#vpc-cni-latest-available-version
   vpc_cni_addon = {
-    addon_name                  = "vpc-cni"
-    addon_version               = var.eks_vpc_cni_addon_version
-    resolve_conflicts           = "OVERWRITE"
-    resolve_conflicts_on_update = "OVERWRITE"
-    configuration_values        = var.eks_vpc_cni_configuration_values == null ? null : jsonencode(var.eks_vpc_cni_configuration_values)
-    service_account_role_arn    = one(module.vpc_cni_eks_iam_role[*].service_account_role_arn)
+    addon_name               = "vpc-cni"
+    addon_version            = var.eks_vpc_cni_addon_version
+    resolve_conflicts        = "OVERWRITE"
+    configuration_values     = var.eks_vpc_cni_configuration_values == null ? null : jsonencode(var.eks_vpc_cni_configuration_values)
+    service_account_role_arn = one(module.vpc_cni_eks_iam_role[*].service_account_role_arn)
   }
 
   coredns_addon = {
