@@ -4,6 +4,7 @@ locals {
     addon_name               = "vpc-cni"
     addon_version            = var.eks_vpc_cni_addon_version
     resolve_conflicts        = "OVERWRITE"
+    configuration_values     = var.eks_vpc_cni_configuration_values == null ? null : jsonencode(var.eks_vpc_cni_configuration_values)
     service_account_role_arn = one(module.vpc_cni_eks_iam_role[*].service_account_role_arn)
   }
 
@@ -11,14 +12,14 @@ locals {
     addon_name               = "coredns"
     addon_version            = var.eks_coredns_addon_version
     resolve_conflicts        = "OVERWRITE"
-    service_account_role_arn = null  
+    service_account_role_arn = null
   }
-  
+
   kube_proxy_addon = {
     addon_name               = "kube-proxy"
     addon_version            = var.eks_kube_proxy_addon_version
     resolve_conflicts        = "OVERWRITE"
-    service_account_role_arn = null  
+    service_account_role_arn = null
   }
 
   addons = concat([
